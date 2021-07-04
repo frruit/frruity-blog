@@ -47,7 +47,7 @@ FileNotFound :-(
 but this is not working on my machine :-(  
 After running it without thinking I have received a irritating **FileNotFound** error message which is shown in the screenshot below:
 
-![backtrader FileNotFount error](/assets/img/backtrader_file_not_found_error.jpg)
+![backtrader FileNotFount error](/assets/images/backtrader_file_not_found_error.jpg)
 
 Damn! I hate it really when a getting started is not working from the scratch. However let's figure out what happens. 
 
@@ -90,7 +90,26 @@ Matplotlib via WSL2 and X11 Window
 
 After the first issues with a 404 the next problem commes direclty. backtrader is using like a lot of other frameworks the matplotlib which is great. SO i tried to plot my results like in the example but no window has opened :-( Why?
 
-It's my environment. I'm currently using Win10 with WSL2 and Ubuntu 20.04. The matplot lib is using by default python-tk which requires an X-Server on the Windows machine site. I have choosen the "VcXsrv X Server".
-...
+It's my environment. 
+I'm currently using Win10 with WSL2 and Ubuntu 20.04. 
+The matplot lib is using by default python-tk which requires an X-Server on the Windows machine site. 
+
+Thanks to the internet i found the following [stackoverflow question][stackoverflow-43397162] which is also no solving my complete issue. In addition to the installation of  **VcXsrv** i had to add some firewall rules to my Mcafee. I have decided to allow the complate IP range from 172.16.*
+
+
+![x11 wsl2 firewall](/assets/images/mcafe_wsl2_localhost_rules.jpg)
+![backtrader FileNotFount error](/assets/images/backtrader_file_not_found_error.jpg)
+![backtrader FileNotFount error](/assets/backtrader_file_not_found_error.jpg)
+
+
+
+Wrong assumtions
+----------------
+
+Buy and Buy strategie is not buying every month ;-(
+
+Wrong assumtion that only a integer value can be buyed.
+
 
 [backtrader-gh]: https://github.com/mementum/backtrader
+[stackoverflow-43397162]: https://stackoverflow.com/questions/43397162/show-matplotlib-plots-and-other-gui-in-ubuntu-wsl1-wsl2
