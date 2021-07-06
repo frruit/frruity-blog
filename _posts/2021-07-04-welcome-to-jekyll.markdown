@@ -105,14 +105,49 @@ So even this issue has been finally solved. Hopefully i can start so to use back
 First strategies implemented succesfully
 ----------------------------------------
 
+After all problems has been solved the implentation of my first simple strategy call start direclt. I have decided to choose something simple like the SMA cross one but with my favorit momentum indicator.
 
+**WHEN** the momentum is above 0
+**THEN** all in
 
-Wrong assumtions
-----------------
+**WHEN** the momentum is below 0
+**THEN** sell all
 
-Buy and Buy strategie is not buying every month ;-(
+So here is my implementation for this
 
-Wrong assumtion that only a integer value can be buyed.
+{% highlight python %}
+import backtrader as bt
+from .base_strategie import BaseStrategy
+
+class SimmpleMomentumnStrategy(BaseStrategy):
+
+    params = dict(
+        period=14
+    )
+
+    def __init__(self):
+        self.momentum = bt.indicators.Momentum(self.data.close, period=self.p.period)      
+
+    def next(self):
+        if not self.position:
+            if self.momentum > 0:
+                self.order_target_value(target=self.broker.get_cash())
+        else:
+            if self.momentum < 0:
+                self.close()
+{% endhighlight %}
+
+Simple isn't it?
+
+The result was really quickly calculated and looks like this
+
+![Simple Momentum strategie](/frruity-blog/assets/images/backtrader_momentum.jpg)
+
+I have to say that for me as a beginner in trading algorithems this is what i wanted to find. Something which works really quickly and localy, has no costs and allows some kind of automation.
+
+Result
+------
+I will stay with backtrade for the moment to learn but in general I think that i'll have also a closer look to zipline and pyfolio. Why? The projects looks for me not maintained anymore and when the start was so troublesome it's often not such a good sign to count on it further. However when it works then it's quite fine.
 
 
 [backtrader-gh]: https://github.com/mementum/backtrader
