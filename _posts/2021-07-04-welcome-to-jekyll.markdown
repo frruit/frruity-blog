@@ -8,15 +8,16 @@ hi **@all**
 
 everything begins with a problem so also this blog.
 
-Currently i spent some free time to learn something about trading alrogithems. In general I want to build up knowledge to make in future decision about the buy/sell of stocks and coins based on algorithems. Since to years i buy diffent assets based on my gut feeling but also sucessfully. 
+Currently I spent some free time to learn something about trading alrogithems. In general I want to build up knowledge to make in future decisions about the buy/sell of stocks and coins based on algorithems. Since two years I buy diffent assets based on my gut feeling but also sucessfully. 
 
-However, now i want to change this and use in future more decisions based on algorithems and maybe, maybe one day also automated. For this i have done some researches via the web and found the python framework [mementum/backtrader][backtrader-gh].
+However, now i want to change this and use in future more decisions based on algorithems and maybe, maybe one day also automated. 
+For this I have done some researches via the web and found the python framework [mementum/backtrader][backtrader-gh].
 
 Why backtrader?
 ---------------
 
-The first observation feals really positiv. Close to have 7k stars, 2.1k forks and a simple getting started. Also what i like here is that is running localy. 
-To give you a impression here is the getting started code from the page where a simple SMA crossing algorithem is implemented:
+The first observation feals really positiv. Close to have 7k stars, 2.1k forks and a simple getting started. What I also like here is that it's running localy. 
+To give you a small impression about the usage here is the getting started code from the page where a simple SMA crossing algorithem is implemented:
 
 {% highlight python %}
 from datetime import datetime
@@ -39,15 +40,14 @@ cerebro.run()
 cerebro.plot()
 {% endhighlight %}
 
-The code here is fine for me. Nice seperation of concern and depedency injection ...
+This is fine for me. Nice seperation of concern and depedency injection ...
 
-FileNotFound :-(
-----------------
+First run result into FileNotFound :-(
+--------------------------------------
 
-but this is not working on my machine :-(  
-After running it without thinking I have received a irritating **FileNotFound** error message which is shown in the screenshot below:
+After running it without thinking too much I have received a irritating **FileNotFound** error message which is shown in the screenshot below:
 
-![backtrader FileNotFount error](/assets/images/backtrader_file_not_found_error.jpg)
+![backtrader FileNotFount error](/frruity-blog/assets/images/backtrader_file_not_found_error.jpg)
 
 Damn! I hate it really when a getting started is not working from the scratch. However let's figure out what happens. 
 
@@ -63,7 +63,7 @@ The **cerebro** class needs data wich are delivered via a file. This file is gen
     ...
 {% endhighlight %}
 
-The page by itself exists but the requests library get's still the 404. After furter researches i have found out that the default User-Agent value from requests is not accpeted by Yahoo. By changing this into 'Mozilla/5.0' or something else the problem is solved and you will receive a **200 - OK**.
+The page by itself exists but the requests library get's still the 404. After furter researches I have found out that the default User-Agent value from requests is not accpeted by Yahoo. By changing this into 'Mozilla/5.0' or something else the problem is solved and you will receive a **200 - OK**.
 
 {% highlight python %}
     ...
@@ -88,7 +88,7 @@ In general this showed me that the framework quality could be maybe low. Such a 
 Matplotlib via WSL2 and X11 Window
 ----------------------------------
 
-After the first issues with a 404 the next problem commes direclty. backtrader is using like a lot of other frameworks the matplotlib which is great. SO i tried to plot my results like in the example but no window has opened :-( Why?
+After the first issues with a 404 the next problem commes direclty. backtrader is using like a lot of other frameworks the matplotlib which is great. So i tried to plot my results like in the example but no window has opened :-( Why?
 
 It's my environment. 
 I'm currently using Win10 with WSL2 and Ubuntu 20.04. 
@@ -97,9 +97,13 @@ The matplot lib is using by default python-tk which requires an X-Server on the 
 Thanks to the internet i found the following [stackoverflow question][stackoverflow-43397162] which is also no solving my complete issue. In addition to the installation of  **VcXsrv** i had to add some firewall rules to my Mcafee. I have decided to allow the complate IP range from 172.16.*
 
 
-![x11 wsl2 firewall](/assets/images/mcafe_wsl2_localhost_rules.jpg)
-![backtrader FileNotFount error](/assets/images/backtrader_file_not_found_error.jpg)
-![backtrader FileNotFount error](/assets/backtrader_file_not_found_error.jpg)
+![x11 wsl2 firewall](/frruity-blog/assets/images/mcafe_wsl2_localhost_rules.jpg)
+
+So even this issue has been finally solved. Hopefully i can start so to use backtrader and focus on the topic to execute back tests with a nice strategy.
+
+
+First strategies implemented succesfully
+----------------------------------------
 
 
 
